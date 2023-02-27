@@ -8,7 +8,7 @@ interface MainContentProps {
 function MainContent(props: MainContentProps) {
   return (
     <React.Fragment>
-      <Box component="main" sx={{ p: 3 }}>
+      <Box component="main" sx={{ width: "100%" }}>
         <Toolbar />
         {props?.children}
       </Box>
