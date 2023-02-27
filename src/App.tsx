@@ -1,6 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import logo from "./logo.svg";
+import "./App.css";
+import "src/fonts/Galada/Galada-Regular.ttf";
+import "src/fonts/Montserrat/Montserrat-VariableFont_wght.ttf";
 
 function App() {
   return (

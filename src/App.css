@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+/* Custom Fonts - Start */
+
+@font-face {
+  font-family: "Galada";
+  src: local("Galada"),
+    url("/src/fonts/Galada/Galada-Regular.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: local("Galada"),
+    url("/src/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
+      format("truetype");
+  font-weight: bold;
+}
+
+/* Custom Fonts - End */
