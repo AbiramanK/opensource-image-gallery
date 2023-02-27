@@ -54,7 +54,10 @@ function Header(props: HeaderProps) {
               display: { xs: shouldOpenSearch ? "block" : "none", sm: "block" },
             }}
           >
-            <SearchComponent placeholder="Search Images here" />
+            <SearchComponent
+              autoFocus={true}
+              placeholder="Search Images here"
+            />
           </Box>
           <Box
             sx={{

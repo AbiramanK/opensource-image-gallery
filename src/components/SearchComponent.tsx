@@ -4,6 +4,7 @@ import { Search as SearchIcon } from "@mui/icons-material";
 
 interface SearchComponentProps {
   placeholder: string;
+  autoFocus: boolean;
 }
 
 function SearchComponent(props: SearchComponentProps) {
@@ -53,7 +54,7 @@ function SearchComponent(props: SearchComponentProps) {
         <StyledInputBase
           placeholder={props?.placeholder}
           inputProps={{ "aria-label": "search" }}
-          autoFocus={true}
+          autoFocus={props?.autoFocus}
         />
       </Search>
     </React.Fragment>
