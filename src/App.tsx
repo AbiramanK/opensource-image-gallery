@@ -5,13 +5,14 @@ import "src/fonts/Montserrat/Montserrat-VariableFont_wght.ttf";
 import "./App.css";
 
 import { BaseLayout, ThemeMode } from "src/layouts";
+import { Jumbotron } from "./components";
 
 function App() {
   return (
     <React.Fragment>
       <ThemeMode>
         <BaseLayout>
-          <h1>Main Page</h1>
+          <Jumbotron />
         </BaseLayout>
       </ThemeMode>
     </React.Fragment>
