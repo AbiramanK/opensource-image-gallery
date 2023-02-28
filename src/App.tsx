@@ -5,9 +5,29 @@ import "src/fonts/Montserrat/Montserrat-VariableFont_wght.ttf";
 import "./App.css";
 
 import { BaseLayout, ThemeMode } from "src/layouts";
-import { Jumbotron, PhotographySeries } from "./components";
+import {
+  HorizontalScrollList,
+  Jumbotron,
+  PhotographySeries,
+} from "./components";
 import { fetchPhotosList } from "./api";
 import { ImageInterface } from "./types";
+
+const tags = [
+  "Elephants",
+  "Tigers",
+  "Lions",
+  "Camels",
+  "Birds",
+  "Mammals",
+  "Nature",
+  "Forests",
+  "Wallpaper",
+  "Brown",
+  "Background",
+  "Walls",
+  "Paints",
+];
 
 function App() {
   const [images, setImages] = useState<ImageInterface[]>();
@@ -25,7 +45,8 @@ function App() {
     <React.Fragment>
       <ThemeMode>
         <BaseLayout>
-          <Jumbotron />
+          {/* <Jumbotron /> */}
+          <HorizontalScrollList list={tags} />
           <PhotographySeries images={images!} />
         </BaseLayout>
       </ThemeMode>

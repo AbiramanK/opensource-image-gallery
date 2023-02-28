@@ -1,3 +1,4 @@
+import HorizontalScrollList from "./HorizontalScrollList";
 import ImageContentBar from "./ImageContentBar";
 import Jumbotron from "./Jumbotron";
 import PhotographySeries from "./PhotographySeries";
@@ -12,4 +13,5 @@ export {
   Jumbotron,
   ImageContentBar,
   PhotographySeries,
+  HorizontalScrollList,
 };
