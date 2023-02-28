@@ -29,7 +29,7 @@ function PhotographySeries(props: PhotographySeriesProps) {
             alignItems: "center",
           }}
         >
-          <CircularProgress />;
+          <CircularProgress />
         </Box>
       </React.Fragment>
     );
