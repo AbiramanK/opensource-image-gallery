@@ -37,6 +37,17 @@
   }
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.react-app-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.react-app-hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 /* Custom Fonts - Start */
 
 @font-face {
