@@ -5,6 +5,7 @@ import PhotographySeries from "./PhotographySeries";
 import SearchComponent from "./SearchComponent";
 import SwitchButton from "./SwitchButton";
 import ThemeToggleSwitch from "./ThemeToggleSwitch";
+import ImagePopup from "./ImagePopup";
 
 export {
   SearchComponent,
@@ -14,4 +15,5 @@ export {
   ImageContentBar,
   PhotographySeries,
   HorizontalScrollList,
+  ImagePopup,
 };
