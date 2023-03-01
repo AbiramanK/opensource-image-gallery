@@ -1621,4 +1621,33 @@ const images = [
   },
 ];
 
-export { images };
+const relatedTags = [
+  "Animals in the wild",
+  "Animals images & pictures",
+  "Elephant image",
+  "Nature images",
+  "Animals walking",
+  "Natural habitat",
+  "Wild",
+  "Animals",
+  "Giant animals",
+  "Forst animals",
+];
+
+const tags = [
+  "Elephants",
+  "Tigers",
+  "Lions",
+  "Camels",
+  "Birds",
+  "Mammals",
+  "Nature",
+  "Forests",
+  "Wallpaper",
+  "Brown",
+  "Background",
+  "Walls",
+  "Paints",
+];
+
+export { images, relatedTags, tags };

@@ -12,22 +12,7 @@ import {
 } from "./components";
 import { fetchPhotosList } from "./api";
 import { ImageInterface } from "./types";
-
-const tags = [
-  "Elephants",
-  "Tigers",
-  "Lions",
-  "Camels",
-  "Birds",
-  "Mammals",
-  "Nature",
-  "Forests",
-  "Wallpaper",
-  "Brown",
-  "Background",
-  "Walls",
-  "Paints",
-];
+import { tags } from "./data";
 
 function App() {
   const [images, setImages] = useState<ImageInterface[]>();
