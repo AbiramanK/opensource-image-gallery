@@ -6,6 +6,7 @@ import { ImageInterface } from "src/types";
 
 interface PhotographySeriesProps {
   images: ImageInterface[] | undefined;
+  onSelect: (image: ImageInterface) => void;
 }
 
 function PhotographySeries(props: PhotographySeriesProps) {
@@ -46,12 +47,7 @@ function PhotographySeries(props: PhotographySeriesProps) {
         sx={{ px: 1 }}
       >
         {props?.images.map((image: ImageInterface, index: number) => (
-          <ImageListItem
-            key={image?.urls?.full}
-            cols={1}
-            rows={1}
-            sx={{ borderRadius: 4 }}
-          >
+          <ImageListItem key={index} cols={1} rows={1} sx={{ borderRadius: 4 }}>
             <img
               {...srcset(image?.urls?.full, image?.width / 12 ?? 121, 3, 3)}
               alt={image?.alt_description!}
@@ -60,6 +56,10 @@ function PhotographySeries(props: PhotographySeriesProps) {
                 borderRadius: 12,
                 borderBottomLeftRadius: 14,
                 borderBottomRightRadius: 14,
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                props?.onSelect(image);
               }}
             />
             <ImageContentBar

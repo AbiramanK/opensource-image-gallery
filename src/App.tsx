@@ -16,6 +16,7 @@ import { tags } from "./data";
 
 function App() {
   const [images, setImages] = useState<ImageInterface[]>();
+  const [selectedImage, setSelectedImage] = useState<ImageInterface>();
 
   async function getPhotos() {
     const photos = await fetchPhotosList();
@@ -26,13 +27,17 @@ function App() {
     getPhotos();
   });
 
+  function onImageSelectHandle(image: ImageInterface) {
+    setSelectedImage(image);
+  }
+
   return (
     <React.Fragment>
       <ThemeMode>
         <BaseLayout>
           {/* <Jumbotron /> */}
           <HorizontalScrollList list={tags} />
-          <PhotographySeries images={images!} />
+          <PhotographySeries images={images!} onSelect={onImageSelectHandle} />
         </BaseLayout>
       </ThemeMode>
     </React.Fragment>
