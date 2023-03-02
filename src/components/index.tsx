@@ -6,6 +6,7 @@ import SearchComponent from "./SearchComponent";
 import SwitchButton from "./SwitchButton";
 import ThemeToggleSwitch from "./ThemeToggleSwitch";
 import ImagePopup from "./ImagePopup";
+import SiriLoader from "./SiriLoader";
 
 export {
   SearchComponent,
@@ -16,4 +17,5 @@ export {
   PhotographySeries,
   HorizontalScrollList,
   ImagePopup,
+  SiriLoader,
 };
