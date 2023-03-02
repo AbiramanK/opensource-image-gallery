@@ -194,6 +194,7 @@ function ImagePopup(props: ImagePopupProps) {
                                   columnGap: 1,
                                   overflowY: "auto",
                                   my: 2,
+                                  mr: 2,
                                 }}
                               >
                                 {props?.relatedTags?.map(
