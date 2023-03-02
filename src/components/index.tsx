@@ -7,7 +7,7 @@ import SwitchButton from "./SwitchButton";
 import ThemeToggleSwitch from "./ThemeToggleSwitch";
 import ImagePopup from "./ImagePopup";
 import SiriLoader from "./SiriLoader";
-import { NoResultFound, Forbidden } from "./errors";
+import { NoResultFound, Forbidden, Unauthorized } from "./errors";
 
 export {
   SearchComponent,
@@ -21,4 +21,5 @@ export {
   SiriLoader,
   NoResultFound,
   Forbidden,
+  Unauthorized,
 };
