@@ -1,12 +1,20 @@
 import { Box, CircularProgress, ImageList, ImageListItem } from "@mui/material";
 import React from "react";
 
-import ImageContentBar from "./ImageContentBar";
-import { ImageInterface } from "src/types";
+import ImageContentBar, { ImageContentBarProps } from "./ImageContentBar";
+
+export interface PhotographyInterface extends ImageContentBarProps {
+  id: string;
+  image: string;
+  description: string;
+  altDescription: string;
+  width: number;
+  height: number;
+}
 
 interface PhotographySeriesProps {
-  images: ImageInterface[] | undefined;
-  onSelect: (image: ImageInterface) => void;
+  images: PhotographyInterface[] | undefined;
+  onSelect: (id: string) => void;
 }
 
 function PhotographySeries(props: PhotographySeriesProps) {
@@ -46,11 +54,11 @@ function PhotographySeries(props: PhotographySeriesProps) {
         gap={20}
         sx={{ px: 1 }}
       >
-        {props?.images.map((image: ImageInterface, index: number) => (
+        {props?.images.map((image: PhotographyInterface, index: number) => (
           <ImageListItem key={index} cols={1} rows={1} sx={{ borderRadius: 4 }}>
             <img
-              {...srcset(image?.urls?.full, image?.width / 12 ?? 121, 3, 3)}
-              alt={image?.alt_description!}
+              {...srcset(image?.image, image?.width / 12 ?? 121, 3, 3)}
+              alt={image?.altDescription!}
               loading="lazy"
               style={{
                 borderRadius: 12,
@@ -59,18 +67,14 @@ function PhotographySeries(props: PhotographySeriesProps) {
                 cursor: "pointer",
               }}
               onClick={() => {
-                props?.onSelect(image);
+                props?.onSelect(image?.id!);
               }}
             />
             <ImageContentBar
-              image={{
-                likes: image?.likes!,
-              }}
-              author={{
-                name: image?.user?.name!,
-                username: image?.user?.username!,
-                picture: image?.user?.profile_image?.medium!,
-              }}
+              likes={image?.likes!}
+              authorName={image?.authorName!}
+              authorUsername={image?.authorUsername!}
+              authorPicture={image?.authorPicture!}
             />
           </ImageListItem>
         ))}

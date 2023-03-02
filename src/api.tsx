@@ -23,9 +23,7 @@ async function fetchPhotosByQuery(
   });
 }
 
-async function fetchPhotoById(
-  query: string
-): Promise<ImageByIdResultInterface> {
+async function fetchPhotoById(id: string): Promise<ImageByIdResultInterface> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(ImageByIdResult);

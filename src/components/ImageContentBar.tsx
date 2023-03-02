@@ -2,19 +2,11 @@ import { ThumbUpOutlined } from "@mui/icons-material";
 import { Avatar, colors, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 
-interface ImageAuthorContentInterface {
-  name: string;
-  username: string;
-  picture: string;
-}
-
-interface ImageContentInterface {
+export interface ImageContentBarProps {
+  authorName: string;
+  authorUsername: string;
+  authorPicture: string;
   likes: number;
-}
-
-interface ImageContentBarProps {
-  image: ImageContentInterface;
-  author: ImageAuthorContentInterface;
 }
 
 function ImageContentBar(props: ImageContentBarProps) {
@@ -44,8 +36,8 @@ function ImageContentBar(props: ImageContentBarProps) {
           <Grid container>
             <Grid item xs={3}>
               <Avatar
-                src={props?.author?.picture}
-                alt={props?.author?.name}
+                src={props?.authorPicture}
+                alt={props?.authorName}
                 sx={{
                   width: 54,
                   height: 54,
@@ -66,7 +58,7 @@ function ImageContentBar(props: ImageContentBarProps) {
                 fontFamily={"Montserrat"}
                 fontSize={16}
               >
-                {props?.author?.name}
+                {props?.authorName}
               </Typography>
               <Typography
                 variant="body2"
@@ -74,7 +66,7 @@ function ImageContentBar(props: ImageContentBarProps) {
                 fontFamily={"Montserrat"}
                 sx={{ fontStyle: "italic" }}
               >
-                @{props?.author?.username}
+                @{props?.authorUsername}
               </Typography>
             </Grid>
           </Grid>
@@ -108,7 +100,7 @@ function ImageContentBar(props: ImageContentBarProps) {
                 fontFamily: "Montserrat",
               }}
             >
-              {props?.image?.likes}
+              {props?.likes}
             </Typography>
           </Grid>
         </Grid>
