@@ -82,6 +82,7 @@ function App() {
 
   useEffect(() => {
     getPhotos();
+    // eslint-disable-next-line
   }, []);
 
   function handleImagePopupClose() {
