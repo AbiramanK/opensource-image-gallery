@@ -37,30 +37,35 @@ function App() {
   }
 
   async function getPhotos() {
-    startLoading();
+    try {
+      startLoading();
 
-    const photos = await fetchPhotosList();
+      const photos = await fetchPhotosList();
 
-    const images: PhotographyInterface[] = [];
+      const images: PhotographyInterface[] = [];
 
-    photos?.map((photo) =>
-      images.push({
-        id: photo?.id!,
-        image: photo?.urls?.regular!,
-        width: photo?.width!,
-        height: photo?.height!,
-        likes: photo?.likes!,
-        description: photo?.description!,
-        altDescription: photo?.alt_description!,
-        authorName: photo?.user?.name,
-        authorUsername: photo?.user?.username,
-        authorPicture: photo?.user?.profile_image?.medium!,
-      })
-    );
+      photos?.map((photo) =>
+        images.push({
+          id: photo?.id!,
+          image: photo?.urls?.regular!,
+          width: photo?.width!,
+          height: photo?.height!,
+          likes: photo?.likes!,
+          description: photo?.description!,
+          altDescription: photo?.alt_description!,
+          authorName: photo?.user?.name,
+          authorUsername: photo?.user?.username,
+          authorPicture: photo?.user?.profile_image?.medium!,
+        })
+      );
 
-    setImages(images);
+      setImages(images);
 
-    stopLoading();
+      stopLoading();
+    } catch (error: any) {
+      stopLoading();
+      console.error("Get photos : catch : ", error);
+    }
   }
 
   useEffect(() => {
@@ -73,26 +78,30 @@ function App() {
   }
 
   async function getImageById(id: string) {
-    setIsImageModalOpen(true);
+    try {
+      setIsImageModalOpen(true);
 
-    const photo = await fetchPhotoById(id);
+      const photo = await fetchPhotoById(id);
 
-    const relatedTags: Array<string> = [];
+      const relatedTags: Array<string> = [];
 
-    photo?.tags?.map((tag) => relatedTags.push(tag?.title));
+      photo?.tags?.map((tag) => relatedTags.push(tag?.title));
 
-    const image: SelectedImageType = {
-      image: photo?.urls?.regular!,
-      title: photo?.description! ?? photo?.alt_description!,
-      totalLikes: photo?.likes!,
-      totalDownloads: photo?.downloads!,
-      relatedTags,
-      authorName: photo?.user?.name!,
-      authorUsername: photo?.user?.username!,
-      authorPicture: photo?.user?.profile_image?.medium!,
-    };
+      const image: SelectedImageType = {
+        image: photo?.urls?.regular!,
+        title: photo?.description! ?? photo?.alt_description!,
+        totalLikes: photo?.likes!,
+        totalDownloads: photo?.downloads!,
+        relatedTags,
+        authorName: photo?.user?.name!,
+        authorUsername: photo?.user?.username!,
+        authorPicture: photo?.user?.profile_image?.medium!,
+      };
 
-    setSelectedImage(image);
+      setSelectedImage(image);
+    } catch (error: any) {
+      console.error("Get Image by Id: catch : ", error);
+    }
   }
 
   function onImageSelectHandle(id: string) {
@@ -100,29 +109,34 @@ function App() {
   }
 
   async function getPhotosByQuery(query: string) {
-    startLoading();
+    try {
+      startLoading();
 
-    const photos = await fetchPhotosByQuery(query);
+      const photos = await fetchPhotosByQuery(query);
 
-    const images: PhotographyInterface[] = [];
+      const images: PhotographyInterface[] = [];
 
-    photos?.results?.map((photo) =>
-      images?.push({
-        id: photo?.id!,
-        image: photo?.urls?.regular!,
-        width: photo?.width!,
-        height: photo?.height!,
-        likes: photo?.likes!,
-        description: photo?.description!,
-        altDescription: photo?.alt_description!,
-        authorName: photo?.user?.name,
-        authorUsername: photo?.user?.username,
-        authorPicture: photo?.user?.profile_image?.medium!,
-      })
-    );
+      photos!?.results?.map((photo) =>
+        images?.push({
+          id: photo?.id!,
+          image: photo?.urls?.regular!,
+          width: photo?.width!,
+          height: photo?.height!,
+          likes: photo?.likes!,
+          description: photo?.description!,
+          altDescription: photo?.alt_description!,
+          authorName: photo?.user?.name,
+          authorUsername: photo?.user?.username,
+          authorPicture: photo?.user?.profile_image?.medium!,
+        })
+      );
 
-    setImages(images);
-    stopLoading();
+      setImages(images);
+      stopLoading();
+    } catch (error: any) {
+      stopLoading();
+      console.error("Get photos by query: catch : ", error?.message);
+    }
   }
 
   function handleSearchBoxChange(query: string) {
