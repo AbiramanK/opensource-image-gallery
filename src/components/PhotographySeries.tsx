@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Box,
-  CircularProgress,
   ImageList,
   ImageListItem,
   useMediaQuery,
@@ -9,6 +8,7 @@ import {
 } from "@mui/material";
 
 import ImageContentBar, { ImageContentBarProps } from "./ImageContentBar";
+import SiriLoader from "./SiriLoader";
 
 export interface PhotographyInterface extends ImageContentBarProps {
   id: string;
@@ -50,7 +50,7 @@ function PhotographySeries(props: PhotographySeriesProps) {
             alignItems: "center",
           }}
         >
-          <CircularProgress />
+          <SiriLoader />
         </Box>
       </React.Fragment>
     );

@@ -11,7 +11,6 @@ import {
   Box,
   colors,
   Grid,
-  CircularProgress,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import {
@@ -21,6 +20,7 @@ import {
   ThumbUpAltOutlined,
   Close as CloseIcon,
 } from "@mui/icons-material";
+import SiriLoader from "./SiriLoader";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -99,7 +99,7 @@ function ImagePopup(props: ImagePopupProps) {
                 alignItems: "center",
               }}
             >
-              <CircularProgress />
+              <SiriLoader />
             </Box>
           )}
           {props?.image && (
