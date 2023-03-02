@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { AppBar, IconButton, Toolbar, Typography, Box } from "@mui/material";
+import {
+  AppBar,
+  IconButton,
+  Toolbar,
+  Typography,
+  Box,
+  Link,
+  colors,
+} from "@mui/material";
 import {
   Menu as MenuIcon,
   Search as SearchIcon,
@@ -36,19 +44,25 @@ function Header(props: HeaderProps) {
             px: 1,
           }}
         >
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: { xs: 0.5, sm: 0.1 },
-              display: { xs: shouldOpenSearch ? "none" : "block", sm: "block" },
-              fontFamily: "Galada",
-              fontSize: 30,
-              textAlign: "left",
-            }}
-          >
-            {props?.appDisplayName}
-          </Typography>
+          <Link href="/" sx={{ textDecoration: "none" }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: { xs: 0.5, sm: 0.1 },
+                display: {
+                  xs: shouldOpenSearch ? "none" : "block",
+                  sm: "block",
+                },
+                fontFamily: "Galada",
+                fontSize: 30,
+                textAlign: "left",
+                color: colors.common.white,
+              }}
+            >
+              {props?.appDisplayName}
+            </Typography>
+          </Link>
           <Box
             sx={{
               flexGrow: 0.6,
