@@ -18,7 +18,7 @@ import { ImagePopupProps } from "./components/ImagePopup";
 
 type SelectedImageType = Omit<
   ImagePopupProps,
-  "onClose" | "open" | "isLoading"
+  "onClose" | "open" | "isLoading" | "error"
 >;
 
 function App() {
@@ -27,6 +27,9 @@ function App() {
   const [selectedImage, setSelectedImage] = useState<SelectedImageType>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [errorStatus, setErrorStatus] = useState<number>();
+  const [getImageByIdErrorStatus, setGetImageByIdErrorStatus] =
+    useState<number>();
 
   function startLoading() {
     setIsLoading(true);
@@ -36,15 +39,24 @@ function App() {
     setIsLoading(false);
   }
 
+  function resetErrorStatus() {
+    setErrorStatus(undefined);
+  }
+
   async function getPhotos() {
     try {
+      resetErrorStatus();
       startLoading();
 
       const photos = await fetchPhotosList();
 
+      if (photos?.error) {
+        return setErrorStatus(photos?.error?.status);
+      }
+
       const images: PhotographyInterface[] = [];
 
-      photos?.map((photo) =>
+      photos?.data?.map((photo) =>
         images.push({
           id: photo?.id!,
           image: photo?.urls?.regular!,
@@ -75,27 +87,34 @@ function App() {
   function handleImagePopupClose() {
     setIsImageModalOpen(false);
     setSelectedImage(undefined);
+    setGetImageByIdErrorStatus(undefined);
   }
 
   async function getImageById(id: string) {
     try {
+      resetErrorStatus();
+      setGetImageByIdErrorStatus(undefined);
       setIsImageModalOpen(true);
 
       const photo = await fetchPhotoById(id);
 
+      if (photo?.error) {
+        return setGetImageByIdErrorStatus(photo?.error?.status);
+      }
+
       const relatedTags: Array<string> = [];
 
-      photo?.tags?.map((tag) => relatedTags.push(tag?.title));
+      photo?.data?.tags?.map((tag) => relatedTags.push(tag?.title));
 
       const image: SelectedImageType = {
-        image: photo?.urls?.regular!,
-        title: photo?.description! ?? photo?.alt_description!,
-        totalLikes: photo?.likes!,
-        totalDownloads: photo?.downloads!,
+        image: photo?.data?.urls?.regular!,
+        title: photo?.data?.description! ?? photo?.data?.alt_description!,
+        totalLikes: photo?.data?.likes!,
+        totalDownloads: photo?.data?.downloads!,
         relatedTags,
-        authorName: photo?.user?.name!,
-        authorUsername: photo?.user?.username!,
-        authorPicture: photo?.user?.profile_image?.medium!,
+        authorName: photo?.data?.user?.name!,
+        authorUsername: photo?.data?.user?.username!,
+        authorPicture: photo?.data?.user?.profile_image?.medium!,
       };
 
       setSelectedImage(image);
@@ -110,13 +129,18 @@ function App() {
 
   async function getPhotosByQuery(query: string) {
     try {
+      resetErrorStatus();
       startLoading();
 
       const photos = await fetchPhotosByQuery(query);
 
+      if (photos?.error) {
+        return setErrorStatus(photos?.error?.status);
+      }
+
       const images: PhotographyInterface[] = [];
 
-      photos!?.results?.map((photo) =>
+      photos!?.data?.results?.map((photo) =>
         images?.push({
           id: photo?.id!,
           image: photo?.urls?.regular!,
@@ -158,6 +182,7 @@ function App() {
             isLoading={isLoading}
             images={images}
             onSelect={onImageSelectHandle}
+            error={errorStatus!}
           />
           <ImagePopup
             open={isImageModalOpen}
@@ -170,6 +195,7 @@ function App() {
             totalLikes={selectedImage?.totalLikes!}
             totalDownloads={selectedImage?.totalDownloads!}
             image={selectedImage?.image!}
+            error={getImageByIdErrorStatus!}
           />
         </BaseLayout>
       </ThemeMode>

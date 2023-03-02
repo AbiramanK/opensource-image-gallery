@@ -1,9 +1,8 @@
 import { API, CLIENT_ID, RESULT_PER_PAGE } from "./constants";
-import { ImageByIdResult, images, imageSearchResult } from "./data";
 import {
-  ImageByIdResultInterface,
-  ImageInterface,
-  SearchImageResultInterface,
+  FetchPhotoByIdResponse,
+  FetchPhotosByQueryResponse,
+  FetchPhotosListResponse,
 } from "./types";
 
 async function makeRequest(
@@ -19,30 +18,42 @@ async function makeRequest(
           return response.json();
         }
 
+        if (response?.status === 403) {
+          return resolve({
+            error: {
+              status: response?.status,
+            },
+            data: null,
+          });
+        }
+
         return reject();
       })
       .then((res) => {
-        return resolve(res);
+        return resolve({
+          error: null,
+          data: res,
+        });
       })
       .catch(() => {
-        reject();
+        return reject();
       });
   });
 }
 
-async function fetchPhotosList(): Promise<ImageInterface[]> {
+async function fetchPhotosList(): Promise<FetchPhotosListResponse> {
   return new Promise((resolve, reject) => {
     return makeRequest(
       `${API}/photos?client_id=${CLIENT_ID}&page=1&per_page=${RESULT_PER_PAGE}&order_by=latest`,
       "GET"
-    ).then((response) => resolve(response as ImageInterface[]));
+    ).then((response) => resolve(response as FetchPhotosListResponse));
   });
 }
 
 let controller: AbortController | undefined;
 async function fetchPhotosByQuery(
   query: string
-): Promise<SearchImageResultInterface> {
+): Promise<FetchPhotosByQueryResponse> {
   return new Promise((resolve, reject) => {
     if (typeof controller != undefined) {
       controller?.abort!();
@@ -62,26 +73,30 @@ async function fetchPhotosByQuery(
           return response.json();
         }
 
+        if (response?.status === 403) {
+          return resolve({ error: { status: response?.status }, data: null });
+        }
+
         return reject();
       })
       .then((res) => {
-        return resolve(res);
+        return resolve({ error: null, data: res });
       })
       .catch((error) => {
         if (error?.name === "AbortError") {
-          return resolve({} as SearchImageResultInterface);
+          return resolve({} as FetchPhotosByQueryResponse);
         }
         return reject();
       });
   });
 }
 
-async function fetchPhotoById(id: string): Promise<ImageByIdResultInterface> {
+async function fetchPhotoById(id: string): Promise<FetchPhotoByIdResponse> {
   return new Promise((resolve, reject) => {
     return makeRequest(
       `${API}/photos/${id}?client_id=${CLIENT_ID}`,
       "GET"
-    ).then((response) => resolve(response as ImageByIdResultInterface));
+    ).then((response) => resolve(response as FetchPhotoByIdResponse));
   });
 }
 

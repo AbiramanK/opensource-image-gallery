@@ -200,3 +200,22 @@ export interface ImageByIdResultInterface extends ImageInterface {
   topics: Array<any>;
   related_collections: RelatedCollectionsInterface;
 }
+
+export interface FetchErrorInterface {
+  status: number;
+}
+
+export interface FetchPhotoByIdResponse {
+  error: FetchErrorInterface | null;
+  data: ImageByIdResultInterface | null;
+}
+
+export interface FetchPhotosByQueryResponse {
+  error: FetchErrorInterface | null;
+  data: SearchImageResultInterface | null;
+}
+
+export interface FetchPhotosListResponse {
+  error: FetchErrorInterface | null;
+  data: ImageInterface[] | null;
+}
