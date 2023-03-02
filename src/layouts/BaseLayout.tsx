@@ -9,6 +9,7 @@ import { ThemeModeContext } from "src/contexts";
 
 interface BaseLayoutProps {
   children: React.ReactNode;
+  onSearchBoxChange: (query: string) => void;
 }
 
 const drawerWidth = 240;
@@ -38,6 +39,7 @@ function BaseLayout(props: BaseLayoutProps) {
           onDrawerToggle={handleDrawerToggle}
           isDarkMode={isDarkMode}
           onToggleDarkMode={handleDarkModeToggle}
+          onSearchBoxChange={props?.onSearchBoxChange}
         />
         <SideNav
           drawerWidth={drawerWidth}

@@ -15,6 +15,7 @@ export interface PhotographyInterface extends ImageContentBarProps {
 interface PhotographySeriesProps {
   images: PhotographyInterface[] | undefined;
   onSelect: (id: string) => void;
+  isLoading: boolean;
 }
 
 function PhotographySeries(props: PhotographySeriesProps) {
@@ -27,7 +28,7 @@ function PhotographySeries(props: PhotographySeriesProps) {
     };
   }
 
-  if (!props?.images) {
+  if (!props?.images || props?.isLoading) {
     return (
       <React.Fragment>
         <Box

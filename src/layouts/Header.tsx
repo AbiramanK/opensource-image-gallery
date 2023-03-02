@@ -15,6 +15,7 @@ interface HeaderProps {
   navItems: Array<string>;
   isDarkMode: boolean;
   onToggleDarkMode: (isDarkModeChecked: boolean) => void;
+  onSearchBoxChange: (event: string) => void;
 }
 
 function Header(props: HeaderProps) {
@@ -57,6 +58,7 @@ function Header(props: HeaderProps) {
             <SearchComponent
               autoFocus={true}
               placeholder="Search Images here"
+              onChange={props?.onSearchBoxChange}
             />
           </Box>
           <Box
