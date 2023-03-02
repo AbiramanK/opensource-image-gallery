@@ -42,7 +42,6 @@ export interface ImagePopupProps {
   totalLikes: number;
   totalDownloads: number;
   image: string;
-  isLoading: boolean;
 }
 
 function ImagePopup(props: ImagePopupProps) {
@@ -91,7 +90,7 @@ function ImagePopup(props: ImagePopupProps) {
               </IconButton>
             </Toolbar>
           </AppBar>
-          {props?.isLoading && (
+          {!props?.image && (
             <Box
               sx={{
                 m: 5,
@@ -103,7 +102,7 @@ function ImagePopup(props: ImagePopupProps) {
               <CircularProgress />
             </Box>
           )}
-          {!props?.isLoading && (
+          {props?.image && (
             <Box
               sx={{
                 flex: 1,

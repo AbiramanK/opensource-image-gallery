@@ -73,7 +73,6 @@ function App() {
   }
 
   async function getImageById(id: string) {
-    startLoading();
     setIsImageModalOpen(true);
 
     const photo = await fetchPhotoById(id);
@@ -94,8 +93,6 @@ function App() {
     };
 
     setSelectedImage(image);
-
-    stopLoading();
   }
 
   function onImageSelectHandle(id: string) {
@@ -159,7 +156,6 @@ function App() {
             totalLikes={selectedImage?.totalLikes!}
             totalDownloads={selectedImage?.totalDownloads!}
             image={selectedImage?.image!}
-            isLoading={isLoading}
           />
         </BaseLayout>
       </ThemeMode>
