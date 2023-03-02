@@ -9,6 +9,7 @@ import {
 
 import ImageContentBar, { ImageContentBarProps } from "./ImageContentBar";
 import SiriLoader from "./SiriLoader";
+import { NoResultFound } from "./errors";
 
 export interface PhotographyInterface extends ImageContentBarProps {
   id: string;
@@ -37,6 +38,22 @@ function PhotographySeries(props: PhotographySeriesProps) {
         size * rows
       }&fit=crop&auto=format&dpr=2 2x`,
     };
+  }
+
+  if (props?.images! && props?.images?.length! === 0 && !props?.isLoading) {
+    return (
+      <React.Fragment>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <NoResultFound />
+        </Box>
+      </React.Fragment>
+    );
   }
 
   if (!props?.images || props?.isLoading) {
