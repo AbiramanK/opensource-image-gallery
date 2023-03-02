@@ -1,5 +1,12 @@
-import { Box, CircularProgress, ImageList, ImageListItem } from "@mui/material";
 import React from "react";
+import {
+  Box,
+  CircularProgress,
+  ImageList,
+  ImageListItem,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 
 import ImageContentBar, { ImageContentBarProps } from "./ImageContentBar";
 
@@ -19,6 +26,10 @@ interface PhotographySeriesProps {
 }
 
 function PhotographySeries(props: PhotographySeriesProps) {
+  const theme = useTheme();
+
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
+
   function srcset(image: string, size: number, rows = 1, cols = 1) {
     return {
       src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -48,9 +59,8 @@ function PhotographySeries(props: PhotographySeriesProps) {
   return (
     <React.Fragment>
       <ImageList
-        // variant="quilted"
         variant="masonry"
-        cols={3}
+        cols={isXs ? 1 : 3}
         rowHeight={375}
         gap={20}
         sx={{ px: 1 }}
@@ -58,7 +68,12 @@ function PhotographySeries(props: PhotographySeriesProps) {
         {props?.images.map((image: PhotographyInterface, index: number) => (
           <ImageListItem key={index} cols={1} rows={1} sx={{ borderRadius: 4 }}>
             <img
-              {...srcset(image?.image, image?.width / 12 ?? 121, 3, 3)}
+              {...srcset(
+                image?.image,
+                image?.width / 12 ?? 121,
+                isXs ? 1 : 3,
+                isXs ? 1 : 3
+              )}
               alt={image?.altDescription!}
               loading="lazy"
               style={{
