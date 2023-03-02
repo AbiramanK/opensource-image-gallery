@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { alpha, InputBase, styled, TextField } from "@mui/material";
+import { alpha, InputBase, styled } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 
 const Search = styled("div")(({ theme }) => ({
