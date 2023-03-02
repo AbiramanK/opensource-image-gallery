@@ -21,6 +21,7 @@ import {
   Close as CloseIcon,
 } from "@mui/icons-material";
 import SiriLoader from "./SiriLoader";
+import { Forbidden } from "./errors";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -42,6 +43,7 @@ export interface ImagePopupProps {
   totalLikes: number;
   totalDownloads: number;
   image: string;
+  error: number;
 }
 
 function ImagePopup(props: ImagePopupProps) {
@@ -90,10 +92,24 @@ function ImagePopup(props: ImagePopupProps) {
               </IconButton>
             </Toolbar>
           </AppBar>
-          {!props?.image && (
+          {props?.error! === 403 && (
             <Box
               sx={{
                 m: 5,
+                flex: 1,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Forbidden />
+            </Box>
+          )}
+          {!props?.error && !props?.image && (
+            <Box
+              sx={{
+                m: 5,
+                flex: 1,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",

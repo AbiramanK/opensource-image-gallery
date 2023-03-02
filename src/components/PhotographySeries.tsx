@@ -9,7 +9,7 @@ import {
 
 import ImageContentBar, { ImageContentBarProps } from "./ImageContentBar";
 import SiriLoader from "./SiriLoader";
-import { NoResultFound } from "./errors";
+import { Forbidden, NoResultFound } from "./errors";
 
 export interface PhotographyInterface extends ImageContentBarProps {
   id: string;
@@ -24,6 +24,7 @@ interface PhotographySeriesProps {
   images: PhotographyInterface[] | undefined;
   onSelect: (id: string) => void;
   isLoading: boolean;
+  error: number;
 }
 
 function PhotographySeries(props: PhotographySeriesProps) {
@@ -40,7 +41,29 @@ function PhotographySeries(props: PhotographySeriesProps) {
     };
   }
 
-  if (props?.images! && props?.images?.length! === 0 && !props?.isLoading) {
+  if (props?.error! === 403) {
+    return (
+      <React.Fragment>
+        <Box
+          sx={{
+            m: 5,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Forbidden />
+        </Box>
+      </React.Fragment>
+    );
+  }
+
+  if (
+    !props?.error &&
+    props?.images! &&
+    props?.images?.length! === 0 &&
+    !props?.isLoading
+  ) {
     return (
       <React.Fragment>
         <Box
