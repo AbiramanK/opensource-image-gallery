@@ -18,7 +18,7 @@ async function makeRequest(
           return response.json();
         }
 
-        if (response?.status === 403) {
+        if (response?.status === 403 || response?.status === 401) {
           return resolve({
             error: {
               status: response?.status,
@@ -73,7 +73,7 @@ async function fetchPhotosByQuery(
           return response.json();
         }
 
-        if (response?.status === 403) {
+        if (response?.status === 403 || response?.status === 401) {
           return resolve({ error: { status: response?.status }, data: null });
         }
 

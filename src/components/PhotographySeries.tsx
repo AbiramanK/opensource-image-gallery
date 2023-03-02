@@ -9,7 +9,7 @@ import {
 
 import ImageContentBar, { ImageContentBarProps } from "./ImageContentBar";
 import SiriLoader from "./SiriLoader";
-import { Forbidden, NoResultFound } from "./errors";
+import { Forbidden, NoResultFound, Unauthorized } from "./errors";
 
 export interface PhotographyInterface extends ImageContentBarProps {
   id: string;
@@ -41,7 +41,7 @@ function PhotographySeries(props: PhotographySeriesProps) {
     };
   }
 
-  if (props?.error! === 403) {
+  if (props?.error!) {
     return (
       <React.Fragment>
         <Box
@@ -52,7 +52,8 @@ function PhotographySeries(props: PhotographySeriesProps) {
             alignItems: "center",
           }}
         >
-          <Forbidden />
+          {props?.error! === 403 && <Forbidden />}
+          {props?.error! === 401 && <Unauthorized />}
         </Box>
       </React.Fragment>
     );
