@@ -55,7 +55,7 @@ async function fetchPhotosByQuery(
   query: string
 ): Promise<FetchPhotosByQueryResponse> {
   return new Promise((resolve, reject) => {
-    if (typeof controller != undefined) {
+    if (controller !== undefined) {
       controller?.abort!();
     }
 
